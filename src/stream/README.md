@@ -12,6 +12,8 @@ Array -> Arrays.sort()
 이러한 문제를 위해서 Stream 은 데이터 소스를 추상화 하여 다루도록 하였고, 추가로 가독성을 높이고, 병렬적으로 처리해 성능 향상도
 기대할 수 있다.
 
+****
+
 ## 📌 특징
 - <b>Stream 은 데이터 원본을 변경하지 않는다.</b>
     - read 작업만 한다.
@@ -33,10 +35,14 @@ Array -> Arrays.sort()
     또한 기본 형타입을 다루기 위한 메소드도 있다. 
     ```
 
+****
+
 ## 📌 장점과 단점
 ### ⚙︎ 장점
 - <b>내부 반복으로 소스코드의 가독성을 높인다.</b>
 - <b>병렬 처리</b>
+
+****
 
 ## 📌 Stream 만드는 방법
 ### ⚙︎ Collection
@@ -93,6 +99,8 @@ Stream<String> stream = Stream.<String>builder()
                               .build();
 ```
 
+****
+
 ## 📌 메소드 활용
 ### ⚙︎ range() & rangeClosed()
 - range: start 부터 end 전 까지 연속된 정수를 스트림으로 생성
@@ -110,6 +118,8 @@ intStream2.forEach(System.out::print);
 range -> 0123456789
 rangeClosed -> 012345678910
 ```
+
+****
 
 ### ⚙︎ Random 값 생성하기
 Random 클래스를 이용한 랜덤 값으로 만들어진 스트림
@@ -154,6 +164,8 @@ new Random().ints();
 1794913569
 1128443685
 ```
+
+****
 
 ### ⚙︎ iterate()
 위에서 무한 스트림(Infinite Stream) 을 랜덤으로 생성하는 방법을 알아 봤는데 그와 다르게 범위를
@@ -211,6 +223,8 @@ IntStream.iterate(0, e -> e + 2)
 마지막으로 주의할 점은 람다식으로 받는 파라미터는 함수형 인터페이스를 인자로 받기 때문에 람다식 혹은 함수형 인터페이스
 구현해서 넘겨줘야 한다.
 
+****
+
 ### ⚙ generate()
 generate 메소드도 iterate() 와 같이 함수형 인터페이스를 인자로 받으며, Seed 값을 계속해서 연산에 사용하는게
 아닌 새로운 값을 생성한다.
@@ -251,6 +265,8 @@ Stream.generate(Math::random)
 0.3142060405874961
 ```
 
+**** 
+
 ### ⚙ empty()
 빈 스트림을 생성한다.
 
@@ -266,3 +282,104 @@ System.out.println(empty.count());
 [ Console Result ] 
 0
 ```
+
+### ⚙︎ skip()
+말 그대로 명시한 요소만큼 시작부터 건너 뛰는 메소드
+
+```java
+IntStream intStream = IntStream.range(1, 10)
+                               .skip(5);
+
+intStream.forEach(System.out::println);
+```
+
+1 ~ 9 까지의 정수를 생성 했지만 앞에서 5개의 요소를 생략한 결과
+
+```
+[ Console Result ] 
+6
+7
+8
+9
+```
+
+
+****
+
+### ⚙︎ limit()
+스트림의 요소를 제한하는 메소드
+
+```java
+IntStream intStream = IntStream.range(1, 10)
+                               .limit(5);
+
+intStream.forEach(System.out::println);
+```
+
+1 ~ 9 까지의 정수를 생성 했지만 앞에서부터 5개의 요소만 출력
+
+```
+[ Console Result ] 
+1
+2
+3
+4
+5
+```
+
+****
+
+### ⚙︎ filter()
+주어진 조건에 참인 요소들만 남기는 메소드
+
+```java
+// IntStream 이기 때문에 IntPredicate 를 인자로 받는다.
+IntStream filter(IntPredicate predicate);
+```
+
+조건식으로 인자로 받아서 스트림에 적용하는 방법으로 연산 결과가 boolean 타입을 만족하는 람다식으로 인자로
+넣어도 무방하다.
+
+````java
+IntStream intStream = IntStream.range(1, 10)
+                               .filter(e -> e % 2 == 0);
+
+intStream.forEach(System.out::println);
+````
+
+람다식을 살펴보면 짝수만 출력하도록 조건을 만들었다.
+
+```
+[ Console Result ] 
+2
+4
+6
+8
+```
+
+****
+
+### ⚙︎ distinct()
+메소드명과 같이 중복된 요소를 걸러주는 기능을 제공한다.
+
+```java
+IntStream.of(1, 1, 1, 2, 2, 3, 3, 3, 3, 4, 4, 5, 6)
+         .distinct()
+         .forEach(System.out::println);
+```
+
+중복된 정수를 제외한 결과를 출력한다.
+
+```
+[ Console Result ] 
+1
+2
+3
+4
+5
+6
+```
+
+****
+
+### ⚙

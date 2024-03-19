@@ -10,8 +10,36 @@ public class Method {
         //testRandom();
         //testIterate();
         //testGenerate();
+        //testSkip();
+        //testLimit();
+        //testFilter();
+        testDistinct();
 
         Stream<Object> empty = Stream.empty();
+    }
+
+    private static void testDistinct() {
+        IntStream.of(1, 1, 1, 2, 2, 3, 3, 3, 3, 4, 4, 5, 6)
+                 .distinct()
+                 .forEach(System.out::println);
+    }
+
+    private static void testFilter() {
+        IntStream.range(1, 10)
+                 .filter(e -> e % 2 == 0)
+                 .forEach(System.out::println);
+    }
+
+    private static void testLimit() {
+        IntStream.range(1, 10)
+                 .limit(5)
+                 .forEach(System.out::println);
+    }
+
+    private static void testSkip() {
+        IntStream.range(1, 10)
+                 .skip(5)
+                 .forEach(System.out::println);
     }
 
     private static void testGenerate() {
