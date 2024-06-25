@@ -1,4 +1,4 @@
-package Course1.lang.poly;
+package Course1.lang.object.poly;
 
 public class ObjectPolyExample1 {
     public static void main(String[] args) {
