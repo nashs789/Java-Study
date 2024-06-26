@@ -22,7 +22,7 @@ public class ToStringMain2 {
         ObjectPrinter.print(dogA);
         ObjectPrinter.print(dogB);
 
-        System.out.println("4. 참조 값 확인");
+        System.out.println("4. 참조 값 확값");
         System.out.println(System.identityHashCode(dogA));
         System.out.println(Integer.toHexString(System.identityHashCode(dogA)));
         System.out.println(dogA.hashCode());
