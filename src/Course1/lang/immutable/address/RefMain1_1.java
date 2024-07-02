@@ -1,6 +1,6 @@
 package Course1.lang.immutable.address;
 
-public class RefMain_1 {
+public class RefMain1_1 {
     public static void main(String[] args) {
         Address a = new Address("서울");
         Address b = a;
