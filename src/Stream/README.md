@@ -22,14 +22,14 @@ Array -> Arrays.sort()
 - <b>지연 연산</b>
     - 최종 연산 메소드가 호출되기 전 까지는 최종 연산이 실행되지 않는다.
     ```
-    stream.distinct().sort().collect()
+    Stream.distinct().sort().collect()
   
     중간 연산자인 distinct, sort 는 최종 연산이 수행 되어야 소모된다.
     ```
 - <b>기본형 타입의 스트림을 제공한다.</b>
     ```
     ex) IntStream
-    {1, 2, 3} 이라는 데이터가 있다면 stream<Integer> wrapper 클래스로 boxing 되어야 하기 때문에  
+    {1, 2, 3} 이라는 데이터가 있다면 Stream<Integer> wrapper 클래스로 boxing 되어야 하기 때문에  
     오토박싱으로 인한 비효율을 줄이기 위해서 IntStream 으로 사용한다.
     
     또한 기본 형타입을 다루기 위한 메소드도 있다. 
@@ -47,24 +47,24 @@ Array -> Arrays.sort()
 ## 📌 Stream 만드는 방법
 ### ⚙︎ Collection
 ```java
-default Stream<E> stream() {
-    return StreamSupport.stream(spliterator(), false);
+default Stream<E> Stream() {
+    return StreamSupport.Stream(spliterator(), false);
 }
 ```
 
-java 의 Collection 인터페이스는 stream 메소드를 구현했기 때문에 Collection 을 구현한 클래스들은 사용할 수 있다.  
+java 의 Collection 인터페이스는 Stream 메소드를 구현했기 때문에 Collection 을 구현한 클래스들은 사용할 수 있다.  
 흔희들 사용하는 List, HashMap 등이 있다.
 
 ```java
 List<String> list = Arrays.asList("Apple", "Banana", "Cat", "Dog");
 
-Stream<String> stream = list.stream();
+Stream<String> Stream = list.Stream();
 ```
 
 ### ⚙ Array
 ````java
-public static <T> Stream<T> stream(T[] array) {
-    return stream(array, 0, array.length);
+public static <T> Stream<T> Stream(T[] array) {
+    return Stream(array, 0, array.length);
 }
 ````
 
@@ -73,25 +73,25 @@ T 타입의 배열에 대해서 Stream 을 생성해서 반환해주는 함수�
 ```java
 String[] strArr = new String[]{"Apple", "Banana", "Cat", "Dog"};
 
-Stream<String> stream = Arrays.stream(strArr);
+Stream<String> Stream = Arrays.Stream(strArr);
 ```
 
 또한 Stream 인터페이스에서 구현한 of 메소드를 통해서도 스트림 생성이 가능하다.
 
 ```java
 public static<T> Stream<T> of(T... values) {
-    return Arrays.stream(values);
+    return Arrays.Stream(values);
 }
 ```
 
-인자로 배열을 받아서 Arrays 에 정의되어 있는 stream 을 사용하기 때문에 이왕이면 Arrays 에 정의되어 있는
+인자로 배열을 받아서 Arrays 에 정의되어 있는 Stream 을 사용하기 때문에 이왕이면 Arrays 에 정의되어 있는
 static 메소드를 활용하자
 
 ### ⚙ Stream builder 패턴
 Stream 에서 제공하는 메소드로 빌더 패턴을 이용해서 만들 수 있다.
 
 ```java
-Stream<String> stream = Stream.<String>builder()
+Stream<String> Stream = Stream.<String>builder()
                               .add("Apple")
                               .add("Banana")
                               .add("Cat")
@@ -201,7 +201,7 @@ iterate() 는 Stream 에서도 구현되어 있기 때문에 위의 예제를 In
 예외가 발생할 것이다.
 
 ```
-cannot be converted to java.util.stream.IntStream
+cannot be converted to java.util.Stream.IntStream
 ```
 
 Wrapper 클래스와 원시 타입을 구분 하거나 스트림의 다른 메소드를 통해서 형변환 하여 해결할 수 있다.
